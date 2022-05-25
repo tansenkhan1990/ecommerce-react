@@ -1,11 +1,14 @@
 import React from 'react'
+import { useState } from "react";
 import { ArrowLeftOutlined, ArrowRightAltOutlined } from '@material-ui/icons';
+import { sliderItems } from '../data';
 import styled from 'styled-components'
 const Container = styled.div`
     width: 100%;
     height: 100vh;
     display: flex;
     position: relative;
+    overflow: hidden;
 `
 const Arrow = styled.div`
     height: 50px;
@@ -23,9 +26,12 @@ const Arrow = styled.div`
     margin: auto;
     cursor: pointer;
     opacity: .5;
+    z-index: 2;
 `
 const Wrapper = styled.div`
     height: 100%;
+    display:flex;
+    transform: translateX(${props=>props.slideIndex * -100}vw);
 `
 const ImageContainer = styled.div`
 height: 100%;
@@ -43,6 +49,7 @@ display: flex;
 align-items: center;
 width: 100vw;
 height: 100vh;
+background-color: ${props=>props.bg};
 `
 const Title = styled.h1`
 font-size: 70px;
@@ -60,51 +67,37 @@ background-color: transparent;
 cursor: pointer;
 `
 const Slider = () => {
+  const [slideIndex, setSlideIndex] = useState(0);
+  const handleClick = (direction) => {
+    if (direction === "left") {
+      setSlideIndex(slideIndex > 0 ? slideIndex - 1 : 2);
+    } else {
+      setSlideIndex(slideIndex < 2 ? slideIndex + 1 : 0);
+    }
+ };
   return (
     <div>
         <Container>
-            <Arrow direction='left'>
+            <Arrow direction='left' onClick={()=>handleClick('left')}>
                 <ArrowLeftOutlined/>
             </Arrow>
-            <Wrapper>
-                <Slide>
+            <Wrapper slideIndex={slideIndex}>
+                {sliderItems.map((item)=>(
+                <Slide bg={item.bg}>
                 <ImageContainer>
-                    <Image src="public/img/how-ecommerce-companies-can-care-for-their-customers-5eb56dfe6c64e-1520x800-1.png"/>
+                    <Image src= {item.img}/>
                 </ImageContainer>
                 <InfoContainer>
-                    <Title>This is a ecommerce side</Title>
-                    <Description>jajajjehfkwjhvl;jwhvlkjrwhvlkerwjhv
-                        slfjvnkljfdvkjeovjlkjv
+                    <Title>{item.title}</Title>
+                    <Description>
+                        {item.desc}
                     </Description>
                     <Button>shop now</Button>
                 </InfoContainer>
                 </Slide>
-                <Slide>
-                <ImageContainer>
-                    <Image src="public/img/how-ecommerce-companies-can-care-for-their-customers-5eb56dfe6c64e-1520x800-1.png"/>
-                </ImageContainer>
-                <InfoContainer>
-                    <Title>This is a ecommerce side</Title>
-                    <Description>jajajjehfkwjhvl;jwhvlkjrwhvlkerwjhv
-                        slfjvnkljfdvkjeovjlkjv
-                    </Description>
-                    <Button>shop now</Button>
-                </InfoContainer>
-                </Slide>
-                <Slide>
-                <ImageContainer>
-                    <Image src="public/img/how-ecommerce-companies-can-care-for-their-customers-5eb56dfe6c64e-1520x800-1.png"/>
-                </ImageContainer>
-                <InfoContainer>
-                    <Title>This is a ecommerce side</Title>
-                    <Description>jajajjehfkwjhvl;jwhvlkjrwhvlkerwjhv
-                        slfjvnkljfdvkjeovjlkjv
-                    </Description>
-                    <Button>shop now</Button>
-                </InfoContainer>
-                </Slide>
+                ))}
             </Wrapper>
-            <Arrow direction='right'>
+            <Arrow direction='right'onClick={()=>handleClick('right')}>
                <ArrowRightAltOutlined />
             </Arrow>
         </Container>
