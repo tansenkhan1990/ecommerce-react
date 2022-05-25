@@ -49,7 +49,7 @@ display: flex;
 align-items: center;
 width: 100vw;
 height: 100vh;
-background-color: ${props=>props.bg};
+background-color: #${(props) => props.bg};
 `
 const Title = styled.h1`
 font-size: 70px;
