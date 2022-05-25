@@ -1,10 +1,11 @@
-import logo from './logo.svg';
 import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css'
+import React from 'react'
+import ReactDOM from 'react-dom'
+import Home from './pages/Home';
 
 function App() {
   return (
-    <h1>hello World</h1>
+    <Home />
   );
 }
 
