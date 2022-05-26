@@ -13,11 +13,11 @@ const Container = styled.div`
 const Arrow = styled.div`
     height: 50px;
     width: 50px;
-    background-color: whitesmoke;
+    /* background-color: whitesmoke; */
     border-radius: 50%;
     display: flex;
     align-items: center;
-    background-color: #f4f8f8;
+    /* background-color: #f4f8f8; */
     position: absolute;
     left: ${props => props.direction==='left' && "10px"};
     right: ${props => props.direction==='right' && "10px"};
@@ -84,7 +84,7 @@ const Slider = () => {
             </Arrow>
             <Wrapper slideIndex={slideIndex}>
                 {sliderItems.map((item)=>(
-                <Slide bg={item.bg}>
+                <Slide bg={item.bg} key = {item.id}>
                 <ImageContainer>
                     <Image src= {item.img}/>
                 </ImageContainer>
