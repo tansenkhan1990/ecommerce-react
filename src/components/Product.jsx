@@ -1,12 +1,10 @@
 import React from 'react'
-import styled from 'styled-components';
-import data from '../data';
-
 import {
     FavoriteBorderOutlined,
     SearchOutlined,
     ShoppingCartOutlined,
   } from "@material-ui/icons";
+  import styled from "styled-components";
   
   const Info = styled.div`
     opacity: 0;
@@ -34,6 +32,7 @@ import {
     justify-content: center;
     background-color: #f5fbfd;
     position: relative;
+  
     &:hover ${Info}{
       opacity: 1;
     }
